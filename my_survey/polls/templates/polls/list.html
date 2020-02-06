@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>설문리스트</title>
+</head>
+<body>
+    <h1>설문 리스트-{{message}}</h1>
+    <ol>
+        <!--반복문을 실행한 처리 결과를 화면에 출력해!-->
+        <!--아래부터는 template코드(파이썬코드)-->
+        {% for question in q_l %}    <!--q_l은 views.py에서 설정한 키값-->
+        <li>
+            <a href='/polls/{{question.pk}}/vote_form'>
+                {{question.question_text}}-{{question.question_text|length}}<br>
+                {{question.pub_date|date:'Y-m'}}
+            </a>
+        </li>
+        {% endfor%}
+    </ol>
+</body>
+</html>
