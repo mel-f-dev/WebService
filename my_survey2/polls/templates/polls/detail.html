@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>설문</title>
+</head>
+<body>
+질문: {{question.question_text}}
+<!--
+    form: 입력양식 묶어주는 역할
+        name: 요청할  view의 url을 지정
+        method: HTTP 요청 방식.(생략시 GET방식)
+    입력 양식
+        공통속성: name(요청파라미터 이름), value(요청파라미터 값)
+        <input> - type='' 타입으로 입력 양식을 지정
+        <select>
+        <textarea>
+-->
+
+<form action='{% url "polls:vote" %}' method='post'>    <!--polls라는 url밑에 vote라는 name-->
+    {% csrf_token %}   <!--홈 만들때 무조건 넣어야됨, 보안 관련, 정상적인 경로로 들어왔는지 확인, 아닐경우 요청을 받지않음-->
+    <input type="hidden" name="question_id" value='{{question.pk}}'>
+   
+    {% for choice in question.choice_set.all %}
+        <input type='radio' id='id_{{choice.pk}}' 
+        name='choice' value='{{choice.pk}}'> <!--name, value-->
+        <label for='id_{{choice.pk}}'>{{choice.choice_text}}</label><br>
+   
+    {% endfor %}
+    <input type='submit' value='전송'>
+    <input type='reset' value='초기화'>
+    <input type='button' value="그냥버튼">
+    <br>
+    <br>
+    <br>
+    <br>
+    {% if error_message %}
+    <div style='color:red'>{{error_message}}</div>
+    {% endif %}
+
+</form>
+</body>
+</html>
+
