@@ -1,0 +1,10 @@
+{% extends 'base html' %}
+
+{% block title %} 사용자 정보 {% endblock title %}
+
+{% block contents %}
+ID: {{user.pk}} <br>
+이름: {{user.name}} <br>
+나이: {{user.age}} <br>
+관심언어: {{ user.interestlanguage_set.all|join:", "}}
+{% endblock contents %}

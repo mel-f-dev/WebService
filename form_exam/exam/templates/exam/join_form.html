@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% block title%}등록{% endblock title%}
+
+{% block contents%}
+
+{% if error_message != None%}
+<span style='color:red'>{{error_message}}</span>
+{% endif%}
+<form action="{% url 'exam:join' %}" method='post'>
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_name">이름</label>
+        <input type="text" class="form-control" id="id_name" name='name'>
+    </div>
+    <div class="form-group">
+        <label for="id_age">나이</label>
+        <input type="text" class="form-control" id="id_age" name='age'>
+    </div>
+    <p>관심언어</p>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name='interest_language' id="inlineCheckbox1" value="python">
+        <label class="form-check-label" for="inlineCheckbox1">파이썬</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name='interest_language' id="inlineCheckbox2" value="Java">
+        <label class="form-check-label" for="inlineCheckbox2">자바</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name='interest_language' id="inlineCheckbox3" value="C">
+        <label class="form-check-label" for="inlineCheckbox3">C 언어</label>
+    </div>
+    <p>
+        <br><button class='btn btn-primary' type='submit'>등록</button>
+    </p>    
+</form>
+{% endblock contents%}

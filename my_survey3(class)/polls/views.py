@@ -44,6 +44,13 @@ class QuestionList(ListView):
     # context 변수명 - 'object_list', '모델명_list'
     context_object_name = 'q_l'    # list.html에서 지정한 값
 
+    # context 변수를 추가할 경우 재정의
+    def get_context_data(self):
+        # ListView에서 만든 Context객체들을 가지고 있는 dictionary 반환
+        context = super().get_context_data()    # super():부모 호출
+        context['message'] = "추가 메세지 입니다."
+        return context
+
 
 class Vote(View):
     # get()/post() - View의 메소드를 재정의(ovverridng)
