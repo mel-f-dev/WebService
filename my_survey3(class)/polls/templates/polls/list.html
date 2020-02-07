@@ -11,7 +11,7 @@
         <!--아래부터는 template코드(파이썬코드)-->
         {% for question in q_l %}    <!--q_l은 views.py의 list함수에서 설정한 키값-->
         <li class = 'list-group-item'>
-            <a href='/polls/{{question.pk}}/vote_form'    class='btn btn-primary'>
+            <a href='{% url "polls:vote" question.pk %}'    class='btn btn-primary'>
                 {{question.question_text}}
             </a>
         </li>

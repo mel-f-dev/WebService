@@ -17,7 +17,7 @@
         <textarea>
 -->
 
-<form action='{% url "polls:vote" %}' method='post'>    <!--polls라는 url밑에 vote라는 name-->
+<form action='{% url "polls:vote" question.pk %}' method='post'>    <!--polls라는 url밑에 vote라는 name-->
     {% csrf_token %}   <!--홈 만들때 무조건 넣어야됨, 보안 관련, 정상적인 경로로 들어왔는지 확인, 아닐경우 요청을 받지않음-->
     <input type="hidden" name="question_id" value='{{question.pk}}'>
 

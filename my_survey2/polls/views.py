@@ -4,7 +4,17 @@ from polls.models import Question, Choice
 from django.http import HttpResponse
 from django.urls import reverse    # url이름으로 경로 조회하는 메소드
 
-# Create your views here.
+
+
+# # Class Based View : View를 만들 때 작성하는 공통기능들을 제공
+#  - django.views.generic.View를 상속받거나 View의 하위 클래스(Generic View)들을 상속
+#  - urls.py에 path 등록: View클래스.as_view()
+# # 주요 Generic View
+#  - TemplateView: 특정 템플릿으로 이동할 때 사용
+#  - DetailView: PK로 한 개의 모델을 조회하여 템플릿에 전달
+#  - ListView: 모델의 전체 데이터를 조회하여 템플릿에 전달
+#  - FormView: 요청파라미터 Form 화면 관련 처리
+
 
 # polls/index 요청을 처리하는 view 함수
 # 첫번째 매개변수: request - HTTP 요청 관련 기능 or 정보 제공.
@@ -16,12 +26,15 @@ def index(request):
     return render(request, "polls/index.html", {'current':currentTime})    # render: 처리결과 호출
 
 
+
+
 def list(request):
-    # 함수 task : 질문들을 조회
+    # 함수 task : 질문목록 조회
     question_list = Question.objects.all() 
     # 응답페이지 (template: polls/list.html)로 이동.
     # render(): 어느 template으로 이동할지 설정. HttpResponse반환.
     return render(request, "polls/list.html", {'q_l':question_list, 'message':'2회'})
+
 
 
 # vote_form(설문 page)을 응답하는 view.
