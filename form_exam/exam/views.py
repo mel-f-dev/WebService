@@ -2,22 +2,24 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View, DetailView
 
-from exam.models import User, InterestLanguage
+from exam.models import User, InterestLanguage, Code
 # Create your views here.
 # 등록 폼 + 등록 처리 View
 class JoinView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'exam/join_form.html') 
+        lang = Code.objects.filter(code_category = 'language')
+        return render(request, 'exam/join_form.html', {'lang':lang}) 
 
     def post(self, request, *args, **kwargs):
         # 1. 요청 파라미터 조회
         name = request.POST.get('name')    # 문자열
         age = request.POST.get('age')    # 문자열
         interest_language_list = request.POST.getlist('interest_language')   # 리스트, 같은 이름으로 여러개 넘어올 때
-        
+        print(name, age, interest_language_list)
         # 2. 요청 파라미터 검증
         if not (name and age and interest_language_list):
-            return render(request, 'exam/join_form.html', {"error_message"})
+            lang = Code.objects.filter(code_category = 'language')
+            return render(request, 'exam/join_form.html', {"error_message":"이름, 나이, 관심언어를 입력하세요.", "lang":lang})
 
         # 3. 처리 - 저장
             # User insert
