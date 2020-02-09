@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설문 리스트</title>
+</head>
+<body>
+    <ul>
+        {% for question in q_l %}
+        <li>
+            <!--url 형식: polls/question 번호/vote_form-->
+            <a href = '/polls/{{question.pk}}/vote_form'>
+            {{question.question_text}}<font size = "1">{{question.pub_date|date:'Y-m-d'}}</font>
+            </a>
+        </li>
+        {% endfor %}
+        
+    </ul>
+</body>
+</html>
