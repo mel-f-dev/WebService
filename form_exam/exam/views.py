@@ -6,6 +6,7 @@ from exam.models import User, InterestLanguage, Code
 # Create your views here.
 # 등록 폼 + 등록 처리 View
 class JoinView(View):
+    # 입력 폼 요청
     def get(self, request, *args, **kwargs):
         lang = Code.objects.filter(code_category = 'language')
         return render(request, 'exam/join_form.html', {'lang':lang}) 
@@ -21,7 +22,7 @@ class JoinView(View):
             lang = Code.objects.filter(code_category = 'language')
             return render(request, 'exam/join_form.html', {"error_message":"이름, 나이, 관심언어를 입력하세요.", "lang":lang})
 
-        # 3. 처리 - 저장
+        # 3. 검증 통과 -> 처리 - 저장
             # User insert
         user = User(name=name, age=age)
         user.save()    # insert. insert 후에 pk를 user 객체에 할당
