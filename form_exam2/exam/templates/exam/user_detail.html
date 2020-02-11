@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}사용자 상세정보{% endblock title %}
+
+{% block contents %}
+<table class='table'>
+    <tr>
+        <th>ID</th>
+        <td>{{user.pk}}</td>
+
+    </tr>
+    <tr>
+        <th>이름</th>
+        <td>{{user.name}}</td>
+    </tr>
+    <tr>
+        <th>나이</th>
+        <td>{{user.age}}</td>
+    </tr>
+    <tr>
+        <th>관심사항</th>
+        <td>{{user.interestlanguage_set.all|join:','}}</td>
+    </tr>
+</table>
+{% endblock contents %}

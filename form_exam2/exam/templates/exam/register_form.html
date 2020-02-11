@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}등록폼{% endblock title%}
+
+{% block contents %}
+<h2>사용자 등록</h2>
+
+<!--
+    field.name: form의 name에 지정하는 값 반환.
+    field.id_for_label: label 값을 반환.
+    field.error: 검증 에러메세지가 있는 경우 반환.
+-->
+
+<form action = '{% url "exam:register" %}' method='post'>
+    {% csrf_token %}    
+    {% for field in form %}
+        {% if field.name != 'interest_language' %}
+        <!-- 일반 폼-이름/나이 -->
+        <div class='form-group'>
+            <label for='{{field.id_for_label}}'>{{field.label}}</label>
+            {{field}}
+        </div>
+            {% if field.errors%}
+                <span style="color:red">{{field.errors}}</span>
+            {% endif %}
+        {% else %}
+        <!-- 체크박스-관심언어 -->
+        <p>관심언어</p>
+        <div class='form-check'>
+            {% for item in field %}
+                {{item}}
+            {% endfor %}
+        </div>
+            {% if field.errors%}
+                <span style="color:red">{{field.errors}}</span>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <input type="submit" value='등록' class="btn btn-primary">
+</form>
+{% endblock contents %}

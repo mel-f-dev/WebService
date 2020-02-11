@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title%}사용자 목록{% endblock title%}
+
+{% block contents %}
+<h2>사용자 목록</h2>
+<table class = 'table table-bordered'>
+    <thead>
+        <th>ID</th>
+        <th>이름</th>
+        <th>나이</th>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+        <tr>
+            <td>{{user.pk}}</td>
+            <td>
+                <a href="{% url 'exam:userdetail' user.pk %}">{{user.name}}</a>
+            </td>
+            <td>{{user.age}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+{# paginator : Paginator 객체 참조, page_obj: Page 객체 참조 #}
+{# 페이징 관련 정보(객체)가 있는지 여부 #}
+{% if is_paginated %}
+<nav>
+<ul class = 'pagination'>
+<!-- 이전 페이지 관련 작업 -->
+{% if page_obj.has_previous %}
+    <li class='page-item'><a class="page-link" href="?/page=1">처음</a></li>
+    <li class='page-item'><a class="page-link" href="?/page={{page_obj.previous_page_number}}">이전</a></li>
+
+{% else %}    
+    <li class='page-item'><span class='page-link'>처음</span></li>
+    <li class='page-item'><span class='page-link'>이전</span></li>
+{% endif %}
+
+
+
+<!-- page group의 페이지 번호 출력 
+page_obj.number: 현재 페이지-->
+{% for page in page_range %}
+    <li class='page-item'>
+    {% if page == page_obj.number %}   <!--현재 페이지인지 확인-->
+        <span class='page-link'>{{page}}</span>
+    {% else %}
+        <a class="page-link" href="?page={{page}}">{{page}}</a>
+    {% endif %}
+    </li>   
+{% endfor %}
+
+
+
+
+
+<!-- 다음 페이지 관련 작업 -->
+{% if page_obj.has_next %}
+    <li class="page-item">
+        <a class='page-link' href="?page={{page_obj.next_page_number}}">다음</a>
+    </li>
+    <li class="page-item">
+        <a class='page-link' href="?page={{paginator.num_pages}}">마지막</a>
+    </li>
+
+{% else %}
+    <li class="page-item">
+        <span class='page-link'>다음</span>
+    </li>
+    <li class="page-item">
+        <span class='page-link'>마지막</span>
+    </li>
+
+{% endif %}
+
+</ul>
+</nav>
+
+
+{% endif %}
+
+{% endblock contents %}
