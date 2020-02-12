@@ -1,0 +1,31 @@
+<!-- fileup/templates/fileup/detail.html -->
+{% extends "base.html" %}
+
+{% block title%}글상세{% endblock %}
+
+{% block contents %}
+<table class='table table-bordered'>
+    <tr>
+        <th>제목</th>
+        <td>{{post.pk}}. {{post.title}}</td>
+    </tr>
+    <tr>
+        <th>상세</th>
+        <td>{{post.info|linebreaksbr}}</td>
+    </tr>
+    <tr>
+        <th>파일</th>
+        <td>
+            <a href='{{post.file.url}}'>{{post.file}}</a>
+        </td>
+    </tr>
+    <tr>
+        <th>사진</th>
+        <td>
+            <img src='{{post.picture.url}}'>
+        </td>
+    </tr>
+
+</table>
+
+{% endblock contents%}
