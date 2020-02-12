@@ -2,6 +2,10 @@
 {%block title%}Home{%endblock%}
 {%block contents%}
 <div class='row'>
-    <h1 class='col-sm-12 m=3'>Form 처리 기본</h1>
+    <h1 class='col-sm-12 m=3'>My Community</h1>
+    {# 템플릿에서 세션 접근: request.session.key #}
+    {% if request.session.user %}
+        {{request.session.user}}님 안녕하세요.
+    {% endif %}
 </div>
 {%endblock contents%}
