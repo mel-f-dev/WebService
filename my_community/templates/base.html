@@ -23,6 +23,7 @@
             <a class="nav-link" href="/admin">관리자메뉴</a>
           </li>
           {% if not request.session.user %}
+          <!--로그인 안해야-->
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account:join' %}">회원가입</a>
             </li>
@@ -30,10 +31,21 @@
               <a class="nav-link" href="{% url 'account:login' %}">로그인</a>
             </li>
           {% else %}  
+          <!--로그인 했을 때만-->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account:detail' request.session.user %}">My Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'fileup:register' %}">글쓰기</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account:logout' %}">로그아웃</a>
-            </li>        
+            </li>             
           {% endif %}
+          <!--로그인여부 상관없이-->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'fileup:list' %}">글목록</a>
+          </li> 
         </ul>
       </nav>
 <div class='container mt-5'>

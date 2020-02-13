@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}회원정보{% endblock title %}
+
+{% block contents %}
+<h2>회원 정보</h2>
+<table class="table">
+    <tr>
+        <th width='15%'>이메일</th>
+        <td>{{member.email}}</td>      
+    </tr>
+    <tr>
+        <th>이름</th>
+        <td>{{member.name}}</td>      
+    </tr>
+    <tr>
+        <th>사진</th>
+        <td>
+            <img src = '{{member.picture.url}}'>      
+        </td>
+    </tr>
+
+</table>
+
+{% endblock contents %}

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),   # template이동시
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
+    path('fileup/', include('fileup.urls')),
     
 ]
 

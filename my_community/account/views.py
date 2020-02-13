@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 
 # 패스워드 암호화 해주는 함수.
 from django.contrib.auth.hashers import make_password
 
 from account.forms import MemberJoinForm, LoginForm
 from account.models import Member
+from account.decorator import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 # 가입처리
@@ -44,8 +46,15 @@ class LoginView(FormView):
 
 
 # 로그아웃
+@login_required
 def logout(request):
     request.session.clear()    # 세션에 저장된 세션데이터를 모두 제거.
-
     return render(request, 'home.html')
+
+# 회원정보
+# @method_decorator(데코레이터 함수, name ='데코레이터를 적용할 메소드명')
+@method_decorator(login_required, name='dispatch')
+class MemberDetailView(DetailView):
+    template_name = 'account/detail.html'
+    model = Member
 
